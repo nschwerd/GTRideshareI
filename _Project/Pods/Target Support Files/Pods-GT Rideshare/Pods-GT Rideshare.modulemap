@@ -1,0 +1,6 @@
+framework module Pods_GT_Rideshare {
+  umbrella header "Pods-GT Rideshare-umbrella.h"
+
+  export *
+  module * { export * }
+}
