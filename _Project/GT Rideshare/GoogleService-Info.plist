@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>448350540827-br7afpd6chvv9lfnmva6jiibf8eb5q4v.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.448350540827-br7afpd6chvv9lfnmva6jiibf8eb5q4v</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC3sOnvBNqCiJwE5rKz0ODSeoMvuAwWXDo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>448350540827</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>edu.gatech.GTRideshare</string>
+	<key>PROJECT_ID</key>
+	<string>gt-rideshare</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gt-rideshare.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:448350540827:ios:0c75791ac89b81c9</string>
+	<key>DATABASE_URL</key>
+	<string>https://gt-rideshare.firebaseio.com</string>
+</dict>
+</plist>
