@@ -84,7 +84,7 @@
                                         <rect key="frame" x="0.0" y="157.5" width="250" height="30"/>
                                         <state key="normal" title="Create a New Account"/>
                                         <connections>
-                                            <segue destination="MDv-RX-SrH" kind="push" id="X09-dK-WVA"/>
+                                            <segue destination="MDv-RX-SrH" kind="show" id="X09-dK-WVA"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -104,6 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="542" y="91"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="pNx-hc-2fb">
@@ -221,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gNF-eL-LyM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="865" y="92"/>
+            <point key="canvasLocation" x="1358" y="92"/>
         </scene>
     </scenes>
 </document>
