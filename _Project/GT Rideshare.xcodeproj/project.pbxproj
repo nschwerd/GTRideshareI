@@ -13,6 +13,7 @@
 		AFACCD2321FA318000A73FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFACCD2221FA318000A73FA6 /* Assets.xcassets */; };
 		AFACCD2621FA318000A73FA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFACCD2421FA318000A73FA6 /* LaunchScreen.storyboard */; };
 		AFBC005621FA6DBA00BC441B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFBC005521FA6DBA00BC441B /* GoogleService-Info.plist */; };
+		AFF8F7E421FB8F69001A983E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8F7E321FB8F69001A983E /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		AFACCD2521FA318000A73FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFACCD2721FA318000A73FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFBC005521FA6DBA00BC441B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AFF8F7E321FB8F69001A983E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E6E373F1DD08D087BAFCF29C /* Pods_GT_Rideshare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GT_Rideshare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 		AFACCD1A21FA317F00A73FA6 /* GT Rideshare */ = {
 			isa = PBXGroup;
 			children = (
+				AFF8F7E221FB8F5C001A983E /* View Controllers */,
 				AFBC005521FA6DBA00BC441B /* GoogleService-Info.plist */,
 				AFACCD1B21FA317F00A73FA6 /* AppDelegate.swift */,
 				AFACCD1F21FA317F00A73FA6 /* Main.storyboard */,
@@ -86,6 +89,14 @@
 				AFACCD2721FA318000A73FA6 /* Info.plist */,
 			);
 			path = "GT Rideshare";
+			sourceTree = "<group>";
+		};
+		AFF8F7E221FB8F5C001A983E /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AFF8F7E321FB8F69001A983E /* LoginViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF8F7E421FB8F69001A983E /* LoginViewController.swift in Sources */,
 				AFACCD1C21FA317F00A73FA6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
