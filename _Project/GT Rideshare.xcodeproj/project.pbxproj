@@ -14,6 +14,7 @@
 		AFACCD2621FA318000A73FA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFACCD2421FA318000A73FA6 /* LaunchScreen.storyboard */; };
 		AFBC005621FA6DBA00BC441B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFBC005521FA6DBA00BC441B /* GoogleService-Info.plist */; };
 		AFF8F7E421FB8F69001A983E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8F7E321FB8F69001A983E /* LoginViewController.swift */; };
+		AFF8F7E621FB90E0001A983E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8F7E521FB90E0001A983E /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		AFACCD2721FA318000A73FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFBC005521FA6DBA00BC441B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AFF8F7E321FB8F69001A983E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AFF8F7E521FB90E0001A983E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		E6E373F1DD08D087BAFCF29C /* Pods_GT_Rideshare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GT_Rideshare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				AFF8F7E321FB8F69001A983E /* LoginViewController.swift */,
+				AFF8F7E521FB90E0001A983E /* RegisterViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF8F7E621FB90E0001A983E /* RegisterViewController.swift in Sources */,
 				AFF8F7E421FB8F69001A983E /* LoginViewController.swift in Sources */,
 				AFACCD1C21FA317F00A73FA6 /* AppDelegate.swift in Sources */,
 			);
