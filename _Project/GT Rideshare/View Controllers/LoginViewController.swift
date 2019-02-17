@@ -37,9 +37,8 @@ class LoginViewController: UIViewController {
             }
             
             
-            let alert = UIAlertController(title: "Success", message: "You have successfully logged in", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "onboardingNav")
+            self.present(vc!, animated: true, completion: nil)
             return
         }
     }

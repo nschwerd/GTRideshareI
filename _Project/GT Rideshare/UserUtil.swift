@@ -20,6 +20,14 @@ struct Schedule {
     var thursday: String?
     var friday: String?
     
+    init(monday: String?, tuesday: String?, wednesday: String?, thursday: String?, friday: String?) {
+        self.monday = monday
+        self.tuesday = tuesday
+        self.wednesday = wednesday
+        self.thursday = thursday
+        self.friday = friday
+    }
+    
     init?(_ data: [String:String]) {
         var realData = data as [String:String?]
         for key in realData.keys {
@@ -60,6 +68,16 @@ struct User {
     var schedule: Schedule
     var seats: Int?
     var willingToDrive: Bool
+    
+    init(uid: String, name: String, phone: String, location: GeoPoint, schedule: Schedule, seats: Int?, willingToDrive: Bool) {
+        self.uid = uid
+        self.name = name
+        self.phone = phone
+        self.location = location
+        self.schedule = schedule
+        self.seats = seats
+        self.willingToDrive = willingToDrive
+    }
     
     init?(_ data: [String: Any], uid: String) {
         guard let name = data["name"] as? String,

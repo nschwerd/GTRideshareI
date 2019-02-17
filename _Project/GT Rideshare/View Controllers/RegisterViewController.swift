@@ -11,13 +11,11 @@ import UIKit
 import Firebase
 
 class RegisterViewController: UIViewController {
-    @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
     @IBAction func onRegister(_ sender: Any) {
-        guard let email = emailField.text, let password = passwordField.text, let name = nameField.text,
-            email != "", password != "", name != "" else {
+        guard let email = emailField.text, let password = passwordField.text, email != "", password != "" else {
             let alert = UIAlertController(title: "Error", message: "Please fill out all required fields", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)

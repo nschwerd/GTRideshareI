@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		7889AFB9CBC6DD13A2047FB5 /* Pods_GT_Rideshare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E373F1DD08D087BAFCF29C /* Pods_GT_Rideshare.framework */; };
 		AF47D3F3221713AB001764BD /* UserUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF47D3F2221713AB001764BD /* UserUtil.swift */; };
+		AF86AE042219A5DE007B1EED /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF86AE032219A5DE007B1EED /* OnboardingNavigationController.swift */; };
+		AF86AE062219A786007B1EED /* OnboardingBasicInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF86AE052219A786007B1EED /* OnboardingBasicInfoViewController.swift */; };
+		AF86AE082219A7A1007B1EED /* OnboardingLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF86AE072219A7A1007B1EED /* OnboardingLocationViewController.swift */; };
+		AF86AE0A2219A7B5007B1EED /* OnboardingScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF86AE092219A7B5007B1EED /* OnboardingScheduleViewController.swift */; };
+		AF86AE0C2219A7D6007B1EED /* OnboardingDriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF86AE0B2219A7D6007B1EED /* OnboardingDriverViewController.swift */; };
 		AFACCD1C21FA317F00A73FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFACCD1B21FA317F00A73FA6 /* AppDelegate.swift */; };
 		AFACCD2121FA317F00A73FA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFACCD1F21FA317F00A73FA6 /* Main.storyboard */; };
 		AFACCD2321FA318000A73FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFACCD2221FA318000A73FA6 /* Assets.xcassets */; };
@@ -22,6 +27,11 @@
 		5D3AE5BB85529F0C9559A479 /* Pods-GT Rideshare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GT Rideshare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GT Rideshare/Pods-GT Rideshare.debug.xcconfig"; sourceTree = "<group>"; };
 		6EB743D09684748F932A98F8 /* Pods-GT Rideshare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GT Rideshare.release.xcconfig"; path = "Pods/Target Support Files/Pods-GT Rideshare/Pods-GT Rideshare.release.xcconfig"; sourceTree = "<group>"; };
 		AF47D3F2221713AB001764BD /* UserUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUtil.swift; sourceTree = "<group>"; };
+		AF86AE032219A5DE007B1EED /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
+		AF86AE052219A786007B1EED /* OnboardingBasicInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingBasicInfoViewController.swift; sourceTree = "<group>"; };
+		AF86AE072219A7A1007B1EED /* OnboardingLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLocationViewController.swift; sourceTree = "<group>"; };
+		AF86AE092219A7B5007B1EED /* OnboardingScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScheduleViewController.swift; sourceTree = "<group>"; };
+		AF86AE0B2219A7D6007B1EED /* OnboardingDriverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDriverViewController.swift; sourceTree = "<group>"; };
 		AFACCD1821FA317F00A73FA6 /* GT Rideshare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GT Rideshare.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFACCD1B21FA317F00A73FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFACCD2021FA317F00A73FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -101,6 +111,11 @@
 			children = (
 				AFF8F7E321FB8F69001A983E /* LoginViewController.swift */,
 				AFF8F7E521FB90E0001A983E /* RegisterViewController.swift */,
+				AF86AE032219A5DE007B1EED /* OnboardingNavigationController.swift */,
+				AF86AE052219A786007B1EED /* OnboardingBasicInfoViewController.swift */,
+				AF86AE072219A7A1007B1EED /* OnboardingLocationViewController.swift */,
+				AF86AE092219A7B5007B1EED /* OnboardingScheduleViewController.swift */,
+				AF86AE0B2219A7D6007B1EED /* OnboardingDriverViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -263,10 +278,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF86AE0A2219A7B5007B1EED /* OnboardingScheduleViewController.swift in Sources */,
+				AF86AE042219A5DE007B1EED /* OnboardingNavigationController.swift in Sources */,
 				AFF8F7E621FB90E0001A983E /* RegisterViewController.swift in Sources */,
+				AF86AE062219A786007B1EED /* OnboardingBasicInfoViewController.swift in Sources */,
+				AF86AE082219A7A1007B1EED /* OnboardingLocationViewController.swift in Sources */,
 				AFF8F7E421FB8F69001A983E /* LoginViewController.swift in Sources */,
 				AFACCD1C21FA317F00A73FA6 /* AppDelegate.swift in Sources */,
 				AF47D3F3221713AB001764BD /* UserUtil.swift in Sources */,
+				AF86AE0C2219A7D6007B1EED /* OnboardingDriverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
