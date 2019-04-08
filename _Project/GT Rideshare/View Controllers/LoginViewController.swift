@@ -14,6 +14,15 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if Auth.auth().currentUser != nil {
+            if let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "mainNavController") {
+                self.present(mainVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
     @IBAction func onLogin(_ sender: Any) {
         guard let email = emailField.text, let password = passwordField.text, email != "", password != "" else {
             let alert = UIAlertController(title: "Error", message: "Please fill out all required fields", preferredStyle: .alert)
@@ -36,9 +45,17 @@ class LoginViewController: UIViewController {
                 return
             }
             
+            UserUtil.retrieveUser(Auth.auth().currentUser!.uid, callback: { (user) in
+                if let _ = user {
+                    if let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "mainNavController") {
+                        self.present(mainVC, animated: false, completion: nil)
+                    }
+                } else {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "onboardingNav")
+                    self.present(vc!, animated: true, completion: nil)
+                }
+            })
             
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "onboardingNav")
-            self.present(vc!, animated: true, completion: nil)
             return
         }
     }

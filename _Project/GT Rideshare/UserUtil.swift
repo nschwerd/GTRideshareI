@@ -9,9 +9,11 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseAuth
+import CoreLocation
 
 typealias UserCallback = (User?) -> Void
 typealias SuccessCallback = (Bool) -> Void
+typealias UsersCallback = ([User]?) -> Void
 
 struct Schedule {
     var monday: String?
@@ -145,6 +147,30 @@ struct UserUtil {
         }
     }
     
+    public static func retrieveAllUsers(callback: @escaping UsersCallback) {
+        let db = Firestore.firestore()
+        db.collection("users").getDocuments { (snapshot, error) in
+            if let error = error {
+                print(error)
+                DispatchQueue.main.async {
+                    callback(nil)
+                }
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                DispatchQueue.main.async {
+                    callback(nil)
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                callback(documents.compactMap({User($0.data(), uid: $0.documentID)}))
+            }
+        }
+    }
+    
     public static func updateUser(_ user: User, callback: SuccessCallback? = nil) {
         let db = Firestore.firestore()
         db.collection("users").document(user.uid).setData(user.dictionary()) { (error) in
@@ -165,4 +191,12 @@ struct UserUtil {
         }
     }
     
+}
+
+extension GeoPoint {
+    public func distanceFrom(_ other: GeoPoint) -> CLLocationDistance {
+        let locA = CLLocation(latitude: self.latitude, longitude: self.longitude)
+        let locB = CLLocation(latitude: other.latitude, longitude: other.longitude)
+        return locA.distance(from: locB)
+    }
 }

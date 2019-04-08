@@ -19,6 +19,8 @@
 		AFACCD2321FA318000A73FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFACCD2221FA318000A73FA6 /* Assets.xcassets */; };
 		AFACCD2621FA318000A73FA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFACCD2421FA318000A73FA6 /* LaunchScreen.storyboard */; };
 		AFBC005621FA6DBA00BC441B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFBC005521FA6DBA00BC441B /* GoogleService-Info.plist */; };
+		AFE37F7A225A6C3100F9BC5A /* NearbyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE37F79225A6C3100F9BC5A /* NearbyTableViewController.swift */; };
+		AFE37F7C225A6C4500F9BC5A /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE37F7B225A6C4500F9BC5A /* ProfileTableViewController.swift */; };
 		AFF8F7E421FB8F69001A983E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8F7E321FB8F69001A983E /* LoginViewController.swift */; };
 		AFF8F7E621FB90E0001A983E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8F7E521FB90E0001A983E /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,8 @@
 		AFACCD2521FA318000A73FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFACCD2721FA318000A73FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFBC005521FA6DBA00BC441B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AFE37F79225A6C3100F9BC5A /* NearbyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyTableViewController.swift; sourceTree = "<group>"; };
+		AFE37F7B225A6C4500F9BC5A /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		AFF8F7E321FB8F69001A983E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AFF8F7E521FB90E0001A983E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		E6E373F1DD08D087BAFCF29C /* Pods_GT_Rideshare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GT_Rideshare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +120,8 @@
 				AF86AE072219A7A1007B1EED /* OnboardingLocationViewController.swift */,
 				AF86AE092219A7B5007B1EED /* OnboardingScheduleViewController.swift */,
 				AF86AE0B2219A7D6007B1EED /* OnboardingDriverViewController.swift */,
+				AFE37F79225A6C3100F9BC5A /* NearbyTableViewController.swift */,
+				AFE37F7B225A6C4500F9BC5A /* ProfileTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -280,12 +286,14 @@
 			files = (
 				AF86AE0A2219A7B5007B1EED /* OnboardingScheduleViewController.swift in Sources */,
 				AF86AE042219A5DE007B1EED /* OnboardingNavigationController.swift in Sources */,
+				AFE37F7A225A6C3100F9BC5A /* NearbyTableViewController.swift in Sources */,
 				AFF8F7E621FB90E0001A983E /* RegisterViewController.swift in Sources */,
 				AF86AE062219A786007B1EED /* OnboardingBasicInfoViewController.swift in Sources */,
 				AF86AE082219A7A1007B1EED /* OnboardingLocationViewController.swift in Sources */,
 				AFF8F7E421FB8F69001A983E /* LoginViewController.swift in Sources */,
 				AFACCD1C21FA317F00A73FA6 /* AppDelegate.swift in Sources */,
 				AF47D3F3221713AB001764BD /* UserUtil.swift in Sources */,
+				AFE37F7C225A6C4500F9BC5A /* ProfileTableViewController.swift in Sources */,
 				AF86AE0C2219A7D6007B1EED /* OnboardingDriverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

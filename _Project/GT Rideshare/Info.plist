@@ -4,6 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSLocationUsageDescription</key>
+	<string>GT Rideshare uses your location to find nearby carpoolers</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>GT Rideshare uses your location to find nearby carpoolers</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

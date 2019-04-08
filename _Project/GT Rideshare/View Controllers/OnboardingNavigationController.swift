@@ -24,9 +24,13 @@ class OnboardingNavigationController: UINavigationController {
         }
         let user = User(uid: uid, name: name!, phone: phone!, location: location!, schedule: schedule!, seats: seats, willingToDrive: willingToDrive!)
         UserUtil.updateUser(user) { (success) in
-            let alert = UIAlertController(title: success ? "Success" : "Error", message: success ? "User profile created!" : "An error ocurred, please try again", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            if let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "mainNavController") {
+                self.present(mainVC, animated: false, completion: {
+                    let alert = UIAlertController(title: success ? "Success" : "Error", message: success ? "User profile created!" : "An error ocurred, please try again", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+                    mainVC.present(alert, animated: true, completion: nil)
+                })
+            }
         }
     }
 }
