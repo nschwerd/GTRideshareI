@@ -70,16 +70,29 @@ class NearbyTableViewController: UITableViewController {
     
     private func loadData() {
         self.refreshControl?.beginRefreshing()
-        UserUtil.retrieveAllUsers { (users) in
-            self.users = users ?? []
-            self.currentUser = users?.filter({$0.uid == Auth.auth().currentUser?.uid}).first
-            self.users = users?.filter({$0.uid != Auth.auth().currentUser?.uid}) ?? []
-            self.users.sort(by: { (a, b) -> Bool in
-                self.currentUser!.location.distanceFrom(a.location) < self.currentUser!.location.distanceFrom(b.location)
-            })
-            print("Did retrieve all \(users?.count ?? -1) users")
-            self.tableView.reloadData()
-            self.refreshControl?.endRefreshing()
+        UserUtil.retrieveCurrentUser { (cU) in
+            guard let cU = cU else {
+                do {
+                try Auth.auth().signOut()
+                    if let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") {
+                        self.present(vc, animated: false, completion: nil)
+                    }
+                } catch {
+                    print("Error signing out")
+                }
+                return
+            }
+            self.currentUser = cU
+            UserUtil.retrieveAllUsers { (users) in
+                self.users = users ?? []
+                self.users = users?.filter({$0.uid != Auth.auth().currentUser?.uid}) ?? []
+                self.users.sort(by: { (a, b) -> Bool in
+                    self.currentUser!.location.distanceFrom(a.location) < self.currentUser!.location.distanceFrom(b.location)
+                })
+                print("Did retrieve all \(users?.count ?? -1) users")
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            }
         }
     }
 }
