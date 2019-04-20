@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class ProfileTableViewController: UITableViewController {
     var profile: User? = nil
@@ -36,6 +37,21 @@ class ProfileTableViewController: UITableViewController {
         self.thursdayLabel.text = profile?.schedule.thursday
         self.fridayLabel.text = profile?.schedule.friday
         self.phoneLabel.text = profile?.phone
+        
+        if self.currentUser?.uid == self.profile?.uid {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(onSignOut))
+        }
+    }
+    
+    @objc func onSignOut() {
+        do {
+            try Auth.auth().signOut()
+            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") {
+                self.present(vc, animated: false, completion: nil)
+            }
+        } catch {
+            print("An error ocurred while signing out")
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
