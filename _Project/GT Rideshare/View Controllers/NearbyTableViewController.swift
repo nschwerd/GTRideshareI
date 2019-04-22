@@ -12,12 +12,19 @@ import CoreLocation
 import FirebaseAuth
 import FirebaseFirestore
 
+enum SortMethod {
+    case location
+    case schedule
+}
+
 class NearbyTableViewController: UITableViewController, CLLocationManagerDelegate {
     
     var users: [User] = []
     var currentUser: User? = nil
     let locManager = CLLocationManager()
     var location: CLLocation?
+    
+    var sortMethod: SortMethod = .location
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +38,20 @@ class NearbyTableViewController: UITableViewController, CLLocationManagerDelegat
             locManager.startUpdatingLocation()
         }
         
+    }
+    
+    @IBAction func onSortButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Sort", message: "What parameter would you like to sort by?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Location", style: .default, handler: { (action) in
+            self.sortMethod = .location
+            self.loadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Schedule Matching", style: .default, handler: { (action) in
+            self.sortMethod = .schedule
+            self.loadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -92,6 +113,7 @@ class NearbyTableViewController: UITableViewController, CLLocationManagerDelegat
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nearbyUserCell")
+        
         if let cell = cell {
             let dbLoc = self.users[indexPath.row].location
             let dist = dbLoc.distanceFrom(currentUser!.location)
@@ -125,7 +147,11 @@ class NearbyTableViewController: UITableViewController, CLLocationManagerDelegat
                 self.users = users ?? []
                 self.users = users?.filter({$0.uid != Auth.auth().currentUser?.uid}) ?? []
                 self.users.sort(by: { (a, b) -> Bool in
-                    self.currentUser!.location.distanceFrom(a.location) < self.currentUser!.location.distanceFrom(b.location)
+                    if (self.sortMethod == .location) {
+                        return self.currentUser!.location.distanceFrom(a.location) < self.currentUser!.location.distanceFrom(b.location)
+                    } else {
+                        return self.currentUser!.schedule.percentMatching(a.schedule) > self.currentUser!.schedule.percentMatching(b.schedule)
+                    }
                 })
                 print("Did retrieve all \(users?.count ?? -1) users")
                 self.tableView.reloadData()

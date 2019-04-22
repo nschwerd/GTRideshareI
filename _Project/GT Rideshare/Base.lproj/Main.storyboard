@@ -259,6 +259,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Nearby" largeTitleDisplayMode="always" id="Aqi-j1-2Ar">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="9rm-wm-hVt">
+                            <connections>
+                                <action selector="onSortButtonPressed:" destination="4hk-RU-0KU" id="eSZ-em-HiQ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="My Profile" id="Pox-Fw-epa">
                             <connections>
                                 <segue destination="dfs-gH-lqa" kind="show" id="pqM-4C-hTE"/>
