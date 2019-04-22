@@ -43,6 +43,11 @@ class ProfileTableViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isToolbarHidden = true
+    }
+    
     @objc func onSignOut() {
         do {
             try Auth.auth().signOut()

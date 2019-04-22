@@ -19,6 +19,7 @@ enum SortMethod {
 
 class NearbyTableViewController: UITableViewController, CLLocationManagerDelegate {
     
+    @IBOutlet weak var sortButton: UIBarButtonItem!
     var users: [User] = []
     var currentUser: User? = nil
     let locManager = CLLocationManager()
@@ -40,18 +41,15 @@ class NearbyTableViewController: UITableViewController, CLLocationManagerDelegat
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isToolbarHidden = false
+    }
+    
     @IBAction func onSortButtonPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Sort", message: "What parameter would you like to sort by?", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Location", style: .default, handler: { (action) in
-            self.sortMethod = .location
-            self.loadData()
-        }))
-        alert.addAction(UIAlertAction(title: "Schedule Matching", style: .default, handler: { (action) in
-            self.sortMethod = .schedule
-            self.loadData()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.sortMethod = self.sortMethod == .location ? .schedule : .location
+        self.sortButton.title = "Sorted by \(self.sortMethod == .location ? "Location" : "Schedule")"
+        self.loadData()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -75,6 +73,8 @@ class NearbyTableViewController: UITableViewController, CLLocationManagerDelegat
             self.currentUser!.location = GeoPoint(latitude: self.location?.coordinate.latitude ?? 0.0, longitude: self.location?.coordinate.longitude ?? 0.0)
             UserUtil.updateUser(self.currentUser!)
         }
+        
+        locManager.stopUpdatingLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
