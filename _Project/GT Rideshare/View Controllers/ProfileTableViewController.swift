@@ -38,9 +38,13 @@ class ProfileTableViewController: UITableViewController {
         self.fridayLabel.text = profile?.schedule.friday
         self.phoneLabel.text = profile?.phone
         
-        if self.currentUser?.uid == self.profile?.uid {
+        if isOwnProfile() {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(onSignOut))
         }
+    }
+    
+    private func isOwnProfile() -> Bool {
+        return self.currentUser?.uid == self.profile?.uid
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +68,49 @@ class ProfileTableViewController: UITableViewController {
         if (indexPath.section == 2) {
             if let url = URL(string: "tel://\(profile!.phone)") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            return
+        }
+        
+        if isOwnProfile() {
+            var user = self.currentUser!
+            if indexPath.section == 0 {
+                if indexPath.row == 1 {
+                    let alert = UIAlertController(title: "Willing to Drive?", message: "Are you willing to drive in a carpool?", preferredStyle: .actionSheet)
+                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                        user.willingToDrive = true
+                        UserUtil.updateUser(user)
+                        self.willingToDriveLabel.text = "Yes"
+                    }))
+                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+                        user.willingToDrive = false
+                        UserUtil.updateUser(user)
+                        self.willingToDriveLabel.text = "No"
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else if indexPath.row == 2 {
+                    let alert = UIAlertController(title: "Number of Seats", message: "How many seats do you have available", preferredStyle: .alert)
+                    alert.addTextField { (field) in
+                        field.keyboardType = .numberPad
+                        field.returnKeyType = .done
+                    }
+                    alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
+                        let text = alert.textFields?[0].text ?? ""
+                        let num = Int(text)
+                        if num != nil && text != "" {
+                            user.seats = num
+                            UserUtil.updateUser(user)
+                            self.seatsLabel.text = "\(user.seats!)"
+                        } else {
+                            let alert2 = UIAlertController(title: "Error", message: "Invalid number of seats!", preferredStyle: .alert)
+                            alert2.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+                            self.present(alert2, animated: true, completion: nil)
+                        }
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
