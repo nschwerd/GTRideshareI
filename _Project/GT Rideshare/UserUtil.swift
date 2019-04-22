@@ -76,7 +76,7 @@ struct Schedule {
         })
     }
     
-    func dictionary() -> [String:Any] {
+    func dictionary() -> [String:String] {
         return [
             "monday": monday ?? "",
             "tuesday": tuesday ?? "",

@@ -27,6 +27,14 @@ class ProfileTableViewController: UITableViewController {
     
     
     override func viewDidLoad() {
+        self.updateLabels()
+        
+        if isOwnProfile() {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(onSignOut))
+        }
+    }
+    
+    private func updateLabels() {
         self.navigationItem.title = profile?.name
         self.distanceLabel.text = "\(round((currentUser!.location.distanceFrom(profile!.location) / 1609.0) * 100.0) / 100.0) miles away"
         self.willingToDriveLabel.text = (profile?.willingToDrive ?? false) ? "Yes" : "No"
@@ -37,10 +45,6 @@ class ProfileTableViewController: UITableViewController {
         self.thursdayLabel.text = profile?.schedule.thursday
         self.fridayLabel.text = profile?.schedule.friday
         self.phoneLabel.text = profile?.phone
-        
-        if isOwnProfile() {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(onSignOut))
-        }
     }
     
     private func isOwnProfile() -> Bool {
@@ -65,12 +69,6 @@ class ProfileTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if (indexPath.section == 2) {
-            if let url = URL(string: "tel://\(profile!.phone)") {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-            return
-        }
         
         if isOwnProfile() {
             var user = self.currentUser!
@@ -85,6 +83,8 @@ class ProfileTableViewController: UITableViewController {
                     alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
                         user.willingToDrive = false
                         UserUtil.updateUser(user)
+                        self.profile = user
+                        self.currentUser = user
                         self.willingToDriveLabel.text = "No"
                     }))
                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -101,6 +101,8 @@ class ProfileTableViewController: UITableViewController {
                         if num != nil && text != "" {
                             user.seats = num
                             UserUtil.updateUser(user)
+                            self.profile = user
+                            self.currentUser = user
                             self.seatsLabel.text = "\(user.seats!)"
                         } else {
                             let alert2 = UIAlertController(title: "Error", message: "Invalid number of seats!", preferredStyle: .alert)
@@ -111,6 +113,56 @@ class ProfileTableViewController: UITableViewController {
                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
+            } else if indexPath.section == 1 {
+                let titles = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+                let alert = UIAlertController(title: "Update Schedule", message: "What is your \(titles[indexPath.row]) schedule?", preferredStyle: .alert)
+                alert.addTextField { (field) in
+                    field.keyboardType = .default
+                    field.text = self.currentUser!.schedule.dictionary()[titles[indexPath.row].lowercased()]
+                    field.returnKeyType = .done
+                }
+                alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
+                    let value = alert.textFields?[0].text
+                    if value != nil && value != "" && value?.range(of: OnboardingScheduleViewController.REGEX, options: .regularExpression, range: nil, locale: nil) == nil {
+                        let alert2 = UIAlertController(title: "Error", message: "Please enter your schedule in the format\nX am/pm - X am/pm", preferredStyle: .alert)
+                        alert2.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+                        self.present(alert2, animated: true, completion: nil)
+                        return
+                    }
+                    var dictionary = self.currentUser!.schedule.dictionary()
+                    dictionary[titles[indexPath.row].lowercased()] = value
+                    user.schedule = Schedule(dictionary)!
+                    UserUtil.updateUser(user)
+                    self.profile = user
+                    self.currentUser = user
+                    self.updateLabels()
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else if indexPath.section == 2 {
+                let alert = UIAlertController(title: "Phone Number", message: "What is your phone number?", preferredStyle: .alert)
+                alert.addTextField { (field) in
+                    field.keyboardType = .phonePad
+                    field.returnKeyType = .done
+                    field.text = self.currentUser?.phone
+                }
+                alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
+                    let text = alert.textFields?[0].text ?? ""
+                    user.phone = text
+                    UserUtil.updateUser(user)
+                    self.profile = user
+                    self.currentUser = user
+                    self.phoneLabel.text = "\(user.phone)"
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            if (indexPath.section == 2) {
+                if let url = URL(string: "tel://\(profile!.phone)") {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+                return
             }
         }
     }

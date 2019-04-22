@@ -16,7 +16,7 @@ class OnboardingScheduleViewController: UIViewController {
     @IBOutlet weak var thursdayField: UITextField!
     @IBOutlet weak var fridayField: UITextField!
     
-    private static let REGEX = "[0-9]?[0-9] [a,A,p,P][m,M] \\- [0-9]?[0-9] [a,A,p,P][m,M]"
+    public static let REGEX = "[0-9]?[0-9] [a,A,p,P][m,M] \\- [0-9]?[0-9] [a,A,p,P][m,M]"
     
     override func viewDidLoad() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(onNextPress))
