@@ -12,15 +12,48 @@ import CoreLocation
 import FirebaseAuth
 import FirebaseFirestore
 
-class NearbyTableViewController: UITableViewController {
+class NearbyTableViewController: UITableViewController, CLLocationManagerDelegate {
     
     var users: [User] = []
     var currentUser: User? = nil
+    let locManager = CLLocationManager()
+    var location: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
+        
+        locManager.delegate = self
+        if (CLLocationManager.authorizationStatus() != .authorizedWhenInUse) {
+            locManager.requestWhenInUseAuthorization()
+        } else {
+            locManager.startUpdatingLocation()
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location error: \(error)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == .authorizedWhenInUse) {
+            locManager.startUpdatingLocation()
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Please enable location services", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.location = locManager.location
+        
+        if var _ = self.currentUser {
+            self.currentUser!.location = GeoPoint(latitude: self.location?.coordinate.latitude ?? 0.0, longitude: self.location?.coordinate.longitude ?? 0.0)
+            UserUtil.updateUser(self.currentUser!)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,7 +96,8 @@ class NearbyTableViewController: UITableViewController {
             let dbLoc = self.users[indexPath.row].location
             let dist = dbLoc.distanceFrom(currentUser!.location)
             cell.textLabel?.text = self.users[indexPath.row].name
-            cell.detailTextLabel?.text = "\(round((dist / 1609.0) * 100.0) / 100.0) miles away"
+            let percent = self.currentUser!.schedule.percentMatching(self.users[indexPath.row].schedule)
+            cell.detailTextLabel?.text = "\(round((dist / 1609.0) * 100.0) / 100.0) miles away - \(Int(percent * 100))% Schedule Match"
         }
         return cell!
     }
@@ -83,6 +117,10 @@ class NearbyTableViewController: UITableViewController {
                 return
             }
             self.currentUser = cU
+            if let loc = self.location {
+                self.currentUser!.location = GeoPoint(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude)
+                UserUtil.updateUser(self.currentUser!)
+            }
             UserUtil.retrieveAllUsers { (users) in
                 self.users = users ?? []
                 self.users = users?.filter({$0.uid != Auth.auth().currentUser?.uid}) ?? []

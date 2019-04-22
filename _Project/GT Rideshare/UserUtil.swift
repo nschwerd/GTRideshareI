@@ -21,6 +21,7 @@ struct Schedule {
     var wednesday: String?
     var thursday: String?
     var friday: String?
+    var data: [(Int, Int)?]
     
     init(monday: String?, tuesday: String?, wednesday: String?, thursday: String?, friday: String?) {
         self.monday = monday
@@ -28,6 +29,9 @@ struct Schedule {
         self.wednesday = wednesday
         self.thursday = thursday
         self.friday = friday
+        self.data = []
+        
+        parseData()
     }
     
     init?(_ data: [String:String]) {
@@ -49,6 +53,27 @@ struct Schedule {
         self.wednesday = wednesday
         self.thursday = thursday
         self.friday = friday
+        self.data = []
+        
+        parseData()
+    }
+    
+    private mutating func parseData() {
+        self.data = [monday, tuesday, wednesday, thursday, friday].map({
+            let parts = $0?.split(separator: "-")
+            let startParts = parts?[0].split(separator: " ")
+            let endParts = parts?[1].split(separator: " ")
+            print("START: \(startParts?[0].trimmingCharacters(in: .whitespaces))")
+            var startTime = Int(startParts?[0].trimmingCharacters(in: .whitespaces) ?? "-1")!
+            var endTime = Int(endParts?[0].trimmingCharacters(in: .whitespaces) ?? "-1")!
+            if (startParts?[1].lowercased().contains("pm") ?? false) {
+                startTime += 12
+            }
+            if (endParts?[1].lowercased().contains("pm") ?? false) {
+                endTime += 12
+            }
+            return (startTime, endTime)
+        })
     }
     
     func dictionary() -> [String:Any] {
@@ -59,6 +84,22 @@ struct Schedule {
             "thursday": thursday ?? "",
             "friday": friday ?? "",
         ]
+    }
+    
+    func percentMatching(_ other: Schedule) -> Double {
+        let odata = other.data
+        var sum = 0.0
+        for i in 0..<odata.count {
+            if (data[i] != nil && odata[i] != nil) {
+                if (data[i]?.0 == odata[i]?.0) {
+                    sum += 1
+                }
+                if (data[i]?.1 == odata[i]?.1) {
+                    sum += 1
+                }
+            }
+        }
+        return sum / 10.0
     }
 }
 
